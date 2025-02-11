@@ -27,6 +27,15 @@ ${(props) =>
       font-weight: 500;
       /* background-color: yellow; */
     `}
+
+    ${(props) =>
+    props.as === "h4" &&
+    css`
+      font-size: 3rem;
+      font-weight: 600;
+      text-align: center;
+      /* background-color: yellow; */
+    `}
 `;
 
 export default Heading;
