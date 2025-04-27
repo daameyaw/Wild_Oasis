@@ -56,7 +56,7 @@ const Button = styled.button`
 //create a new context
 const ModalContext = createContext();
 
-export default function Modal({ children }) {
+function Modal({ children }) {
   const [openName, setOpenName] = useState("");
 
   const close = () => setOpenName("");
@@ -70,20 +70,21 @@ export default function Modal({ children }) {
 }
 
 function Open({ children, opens: openWindowName }) {
-  const { open, name } = useContext(ModalContext);
+  const { open, name, openName } = useContext(ModalContext);
 
   return cloneElement(children, {
-    onClick: () => {
-      console.log("click"),
-        open(openWindowName),
-        console.log(openWindowName),
-        console.log(name);
+    onClick: (e) => {
+      console.log("click"), e.stopPropagation();
+      open(openWindowName), console.log(openWindowName), console.log(openName);
     },
   });
 }
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
   const ref = useOutsideClick(close);
+  console.log(openName);
+
+  console.log(name === openName);
 
   if (name !== openName) return null;
 
@@ -94,6 +95,7 @@ function Window({ children, name }) {
           <HiXMark />
         </Button>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
+        {/* <div>{children}</div> */}
       </StyledModal>
     </Overlay>,
     document.body
@@ -102,3 +104,4 @@ function Window({ children, name }) {
 
 Modal.Open = Open;
 Modal.Window = Window;
+export default Modal;

@@ -8,10 +8,10 @@ export function useOutsideClick(handler) {
       function handleClick(e) {
         if (ref.current && !ref.current.contains(e.target)) handler();
       }
-      document.addEventListener("click", handleClick, true);
+      document.addEventListener("click", handleClick, false);
 
       return () => {
-        document.removeEventListener("click", handleClick, true);
+        document.removeEventListener("click", handleClick, false);
       };
     },
     [handler]

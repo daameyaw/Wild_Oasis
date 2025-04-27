@@ -50,7 +50,7 @@ function CheckinBooking() {
   // const optionalBreakfastPrice = 10;
 
   const optionalBreakfastPrice =
-    settings.breakfastPrice * numGuests * numNights;
+    settings?.breakfastPrice * numGuests * numNights;
 
   if (isLoading || isLoadingSettings) return <Spinner />;
 
@@ -70,7 +70,7 @@ function CheckinBooking() {
       checkin({ bookingId, breakfast: {} });
     }
   }
-  console.log(typeof settings.breakfastPrice);
+  // console.log(typeof settings.breakfastPrice);
 
   return (
     <>
@@ -102,7 +102,7 @@ function CheckinBooking() {
           onChange={() => setConfirmPaid((confirm) => !confirm)}
           id="confirm"
         >
-          I confirm that {guests.fullName} has paid the total amount of{" "}
+          I confirm that {guests?.fullName} has paid the total amount of{" "}
           {!addBreakfast
             ? formatCurrency(totalPrice)
             : `${formatCurrency(
